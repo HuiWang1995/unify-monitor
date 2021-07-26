@@ -1,0 +1,22 @@
+server:
+  port: 18761
+
+spring:
+  application:
+    name: unify-monitor
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/monitor?characterEncoding=utf8&characterSetResults=utf8&autoReconnect=true&failOverReadOnly=false
+    username: root
+    password: 123456
+
+
+eureka:
+  instance:
+    hostname: 127.0.0.1 # 服务所在主机（一般都是配置域名；本地测试的话，需要在 host 文件中指定虚拟域名
+    lease-renewal-interval-in-seconds: 5 # 心跳时间，表示eureka client发送心跳给eureka server端的频率（缺省为30s）
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/ # eureka服务器的地址
+    fetch-registry: false # 获取注册列表
+    register-with-eureka: false # 是否将自己也注册到其他eureka节点上。一般设置为true或者默认即可，这样才会在eureka控制台上看到所有的eureka集群列表信息
